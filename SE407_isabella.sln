@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2BA56895-8B6A-422C-823B-9F9A335BDD75}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0E62EBC8-BA33-4AA5-B0C7-4E76605393DB}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SE407_isabella", "src\SE407_isabella\SE407_isabella.xproj", "{32E9D4C7-E986-4C73-9186-0A5C919A8185}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{32E9D4C7-E986-4C73-9186-0A5C919A8185}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32E9D4C7-E986-4C73-9186-0A5C919A8185}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32E9D4C7-E986-4C73-9186-0A5C919A8185}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32E9D4C7-E986-4C73-9186-0A5C919A8185}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{32E9D4C7-E986-4C73-9186-0A5C919A8185} = {2BA56895-8B6A-422C-823B-9F9A335BDD75}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,163 @@
+﻿@model SE407_isabella.InspectionViewModel
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@if (TempData["ResultMessage"] != null)
+{
+    <p class="alert alert-success" id="successMessage">
+        @TempData["ResultMessage"]
+    </p>
+}
+<br />
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            @using (Html.BeginForm("Index", "Inspection", FormMethod.Post))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.NewInspection.InspectionId)
+                    @Html.TextBoxFor(Model => Model.NewInspection.InspectionId,
+                   new { @class = "form-control" })
+                    <span asp-validation-for="@Model.NewInspection.InspectionId"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.NewInspection.BridgeId)
+                    <select asp-for="@Model.NewInspection.BridgeId"
+                            asp-items="@Model.Bridges" class="form-control">
+                        <option value="" selected>Choose Bridge</option>
+                    </select>
+                    <span asp-validation-for="@Model.NewInspection.BridgeId"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.NewInspection.DeckInspectionCodeId)
+                    <select asp-for="@Model.NewInspection.DeckInspectionCodeId"
+                            asp-items="@Model.DeckInspectionCodes" class="form-control">
+                        <option value="" selected>Choose Deck Inspection Code</option>
+                    </select>
+                    <span asp-validation-for="@Model.NewInspection.DeckInspectionCodeId"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.NewInspection.InspectionDate)
+                    @Html.TextBoxFor(Model => Model.NewInspection.InspectionDate,
+                   new { @class = "form-control" })
+                    <span asp-validation-for="@Model.NewInspection.InspectionDate"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.NewInspection.InspectionNotes)
+                    @Html.TextBoxFor(Model => Model.NewInspection.InspectionNotes,
+                   new { @class = "form-control" })
+                    <span asp-validation-for="@Model.NewInspection.InspectionNotes"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.NewInspection.InspectorId)
+                    <select asp-for="@Model.NewInspection.InspectorId"
+                            asp-items="@Model.Inspectors" class="form-control">
+                        <option value="" selected>Choose Inspector</option>
+                    </select>
+                    <span asp-validation-for="@Model.NewInspection.InspectorId"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.NewInspection.SubstructureInspectionCodeId)
+                    <select asp-for="@Model.NewInspection.SubstructureInspectionCodeId"
+                            asp-items="@Model.SubstructureInspectionCodes" class="form-control">
+                        <option value="" selected>Choose Substructure Inspection Code</option>
+                    </select>
+                    <span asp-validation-for="@Model.NewInspection.SubstructureInspectionCodeId"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.NewInspection.SuperstructureInspectionCodeId)
+                    <select asp-for="@Model.NewInspection.SuperstructureInspectionCodeId"
+                            asp-items="@Model.SuperstructureInspectionCodes" class="form-control">
+                        <option value="" selected>Choose Superstructure Inspection Code</option>
+                    </select>
+                    <span asp-validation-for="@Model.NewInspection.SuperstructureInspectionCodeId"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Submit" class="btn btn-lg" />
+                </div>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h2> List of inspections:</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <tr>
+                        <th> Inspection ID </th>
+                        <th> Bridge ID </th>
+                        <th> Deck Inspection Code ID </th>
+                        <th> Inspection Date </th>
+                        <th> Inspection Notes </th>
+                        <th> Inspector ID </th>
+                        <th> Substructure Inspection Code ID </th>
+                        <th> Superstructure Inspection Code ID </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    @foreach (var inspection in Model.InspectionList)
+            {
+                        <tr>
+                            <td>@inspection.InspectionId</td>
+                            <td>
+                                @if (inspection.BridgeId != null)
+                                {
+                                    @Model.Bridges.Where(
+                                        d => d.Value == inspection.BridgeId.ToString()).FirstOrDefault().Text;
+                                }
+                            </td>
+                            <td>
+                                @if (inspection.DeckInspectionCodeId != null)
+                                {
+                                    @Model.DeckInspectionCodes.Where(
+                                        d => d.Value == inspection.DeckInspectionCodeId.ToString()).FirstOrDefault().Text;
+                                }
+                            </td>
+                            <td>@inspection.InspectionDate</td>
+                            <td>@inspection.InspectionNotes</td>
+                            <td>
+                                @if (inspection.InspectorId != null)
+                                {
+                                    @Model.Inspectors.Where(
+                                        d => d.Value == inspection.InspectorId.ToString()).FirstOrDefault().Text;
+                                }
+                            </td>
+                            <td>
+                                @if (inspection.SubstructureInspectionCodeId != null)
+                                {
+                                    @Model.SubstructureInspectionCodes.Where(
+                                        d => d.Value == inspection.SubstructureInspectionCodeId.ToString()).FirstOrDefault().Text;
+                                }
+                            </td>
+                            <td>
+                                @if (inspection.SuperstructureInspectionCodeId != null)
+                                {
+                                    @Model.SuperstructureInspectionCodes.Where(
+                                        d => d.Value == inspection.SuperstructureInspectionCodeId.ToString()).FirstOrDefault().Text;
+                                }
+                            </td>
+                            <td><a asp-action="Edit" asp-route-id="@inspection.InspectionId">Edit</a></td>
+                            <td><a asp-action="Delete" asp-route-id="@inspection.InspectionId" onclick='return confirm("Are your sure?");'>Delete</a></td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

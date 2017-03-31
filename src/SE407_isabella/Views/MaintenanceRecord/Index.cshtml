@@ -1,0 +1,169 @@
+﻿@model SE407_isabella.MaintenanceRecordViewModel
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@if (TempData["ResultMessage"] != null)
+{
+    <p class="alert alert-success" id="successMessage">
+        @TempData["ResultMessage"]
+    </p>
+}
+<br />
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            @using (Html.BeginForm("Index", "MaintenanceRecord", FormMethod.Post))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.NewMaintenanceRecord.InspectorId)
+                    <select asp-for="@Model.NewMaintenanceRecord.InspectorId"
+                            asp-items="@Model.Inspectors" class="form-control">
+                        <option value="" selected>Choose Inspector</option>
+                    </select>
+                    <span asp-validation-for="@Model.NewMaintenanceRecord.InspectorId"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.NewMaintenanceRecord.InspectorNotes)
+                    @Html.TextBoxFor(Model => Model.NewMaintenanceRecord.InspectorNotes,
+                   new { @class = "form-control" })
+                    <span asp-validation-for="@Model.NewMaintenanceRecord.InspectorNotes"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.NewMaintenanceRecord.MaintenanceActionId)
+                    <select asp-for="@Model.NewMaintenanceRecord.MaintenanceActionId"
+                            asp-items="@Model.MaintenanceActions" class="form-control">
+                        <option value="" selected>Choose Maintenance Action</option>
+                    </select>
+                    <span asp-validation-for="@Model.NewMaintenanceRecord.MaintenanceActionId"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.NewMaintenanceRecord.MaintenanceActualCost)
+                    @Html.TextBoxFor(Model => Model.NewMaintenanceRecord.MaintenanceActualCost,
+                   new { @class = "form-control" })
+                    <span asp-validation-for="@Model.NewMaintenanceRecord.MaintenanceActualCost"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.NewMaintenanceRecord.MaintenanceActualStart)
+                    @Html.TextBoxFor(Model => Model.NewMaintenanceRecord.MaintenanceActualStart,
+                   new { @class = "form-control" })
+                    <span asp-validation-for="@Model.NewMaintenanceRecord.MaintenanceActualStart"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.NewMaintenanceRecord.MaintenanceActualEnd)
+                    @Html.TextBoxFor(Model => Model.NewMaintenanceRecord.MaintenanceActualEnd,
+                   new { @class = "form-control" })
+                    <span asp-validation-for="@Model.NewMaintenanceRecord.MaintenanceActualEnd"
+                          class="text-danger"></span>
+                </div>        
+                      
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.NewMaintenanceRecord.MaintenanceRecordId)
+                    @Html.TextBoxFor(Model => Model.NewMaintenanceRecord.MaintenanceRecordId,
+                   new { @class = "form-control" })
+                    <span asp-validation-for="@Model.NewMaintenanceRecord.MaintenanceRecordId"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.NewMaintenanceRecord.MaintenanceNotes)
+                    @Html.TextBoxFor(Model => Model.NewMaintenanceRecord.MaintenanceNotes,
+                   new { @class = "form-control" })
+                    <span asp-validation-for="@Model.NewMaintenanceRecord.MaintenanceNotes"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.NewMaintenanceRecord.MaintenanceProjectedCost)
+                    @Html.TextBoxFor(Model => Model.NewMaintenanceRecord.MaintenanceProjectedCost,
+                   new { @class = "form-control" })
+                    <span asp-validation-for="@Model.NewMaintenanceRecord.MaintenanceProjectedCost"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.NewMaintenanceRecord.MaintenanceProjectedStart)
+                    @Html.TextBoxFor(Model => Model.NewMaintenanceRecord.MaintenanceProjectedStart,
+                   new { @class = "form-control" })
+                    <span asp-validation-for="@Model.NewMaintenanceRecord.MaintenanceProjectedStart"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.NewMaintenanceRecord.MaintenanceProjectedEnd)
+                    @Html.TextBoxFor(Model => Model.NewMaintenanceRecord.MaintenanceProjectedEnd,
+                   new { @class = "form-control" })
+                    <span asp-validation-for="@Model.NewMaintenanceRecord.MaintenanceProjectedEnd"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Submit" class="btn btn-lg" />
+                </div>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h2> List of maintenance records:</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <tr>
+                        <th> Inspector ID </th>
+                        <th> Inspector Notes </th>
+                        <th> MaintenanceAction ID </th>
+                        <th> Maintenance Actual Cost </th>
+                        <th> Maintenance Actual Start </th>
+                        <th> Maintenance Actual End </th>
+                        <th> Maintenance Record ID </th>
+                        <th> Maintenance Notes </th>
+                        <th> Maintenance Projected Cost </th>
+                        <th> Maintenance Projected Start </th>
+                        <th> Maintenance Projected End</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    @foreach (var maintenancerecord in Model.MaintenanceRecordList)
+            {
+                        <tr>
+                            <td>
+                                @if (maintenancerecord.InspectorId != null)
+                                {
+                                    @Model.Inspectors.Where(
+                                        d => d.Value == maintenancerecord.InspectorId.ToString()).FirstOrDefault().Text;
+                                }
+                            </td>
+                            <td>@maintenancerecord.InspectorNotes</td>
+                            <td>
+                                @if (maintenancerecord.MaintenanceActionId != null)
+                                {
+                                    @Model.MaintenanceActions.Where(
+                                        d => d.Value == maintenancerecord.MaintenanceActionId.ToString()).FirstOrDefault().Text;
+                                }
+                            </td>
+                            <td>@maintenancerecord.MaintenanceActualCost</td>
+                            <td>@maintenancerecord.MaintenanceActualStart</td>
+                            <td>@maintenancerecord.MaintenanceActualEnd</td>
+                            <td>@maintenancerecord.MaintenanceRecordId</td>
+                            <td>@maintenancerecord.MaintenanceNotes</td>
+                            <td>@maintenancerecord.MaintenanceProjectedCost</td>
+                            <td>@maintenancerecord.MaintenanceProjectedStart</td>
+                            <td>@maintenancerecord.MaintenanceProjectedEnd</td>
+                            <td><a asp-action="Edit" asp-route-id="@maintenancerecord.MaintenanceRecordId">Edit</a></td>
+                            <td><a asp-action="Delete" asp-route-id="@maintenancerecord.MaintenanceRecordId" onclick='return confirm("Are your sure?");'>Delete</a></td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
